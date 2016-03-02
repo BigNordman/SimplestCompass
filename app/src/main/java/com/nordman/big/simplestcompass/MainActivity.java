@@ -41,7 +41,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     private float mCurrentDegree = 0f;
     private float mAzimuthDegree = 0f;
 
-    Timer tick = null;
+    Timer tick = null; // Таймер, использующийся в MainActivity для плавной анимации компаса
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     protected void onResume() {
         super.onResume();
 
+        // создаем таймер если еще не создан
         if (tick==null){
             tick = new Timer();
             tick.schedule(new UpdateTickTask(), 0, TICK_INTERVAL); //тикаем каждую секунду
@@ -88,6 +89,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        // при изменении сенсора сохранить в глобальной переменной mAzimuthDegree значение азимута в градусах
         if (event.sensor == mAccelerometer) {
             System.arraycopy(event.values, 0, mLastAccelerometer, 0, event.values.length);
             mLastAccelerometerSet = true;
