@@ -48,7 +48,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        image = (ImageView) findViewById(R.id.imageViewCompass);
+        image = (ImageView) findViewById(R.id.imageViewArrow);
         // TextView that will tell the user what degree is he heading
         tvHeading = (TextView) findViewById(R.id.tvHeading);
 
@@ -172,7 +172,8 @@ public class MainActivity extends Activity implements SensorEventListener {
                 mCurrentDegree = mAzimuthDegree;
             }
 
-            tvHeading.setText("Heading: " + Float.toString(-mCurrentDegree) + " degrees");
+            //tvHeading.setText("Heading: " + Float.toString(-mCurrentDegree) + " degrees");
+            tvHeading.setText(String.format("%.0f°",-mCurrentDegree));
 
             return false;
         }
